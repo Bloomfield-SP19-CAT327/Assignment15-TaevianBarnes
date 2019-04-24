@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour {
 	private AudioMixer audioMixer;
 	private Slider masterVolumeSlider;
+	private Slider musicVolumeSlider;
+	private Slider soundVolumeSlider;
 
 	float master;
 	float music;
@@ -15,6 +17,8 @@ public class GameController : MonoBehaviour {
 	void Awake() {
 		audioMixer = Resources.Load ("Audio/GameAudioMixer") as AudioMixer;
 		masterVolumeSlider = GameObject.Find("MasterVolumeSlider").GetComponent<Slider>();
+		musicVolumeSlider = GameObject.Find("MusicVolumeSlider").GetComponent<Slider>();
+		soundVolumeSlider = GameObject.Find("SoundVolumeSlider").GetComponent<Slider>();
 	}
 
 	void Start () {
@@ -27,11 +31,23 @@ public class GameController : MonoBehaviour {
 		Debug.Log ("SoundFX: " + sound);
 
 		masterVolumeSlider.value = master;
+		musicVolumeSlider.value = music;
+		soundVolumeSlider.value = sound;
 	}
 
 	public void changeMasterVolumeSlider () {
 		audioMixer.SetFloat ("masterVolume", masterVolumeSlider.value);
 		// Write to PlayerPrefs if you wanted...
+	}
+
+	public void changeMusicVolumeSlider ()
+	{
+	    audioMixer.SetFloat ("musicVolume", musicVolumeSlider.value);
+	}
+
+	public void changeSoundVolumeSlider ()
+	{
+	    audioMixer.SetFloat ("soundVolume", soundVolumeSlider.value);
 	}
 
 	void Update () {
